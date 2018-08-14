@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Word Guess Game</title>
+        
+    </head>
+    <body>
+        <h1>The Psychic Game</h1>
+
+        <p>Guess what letter I'm thinking of.</p>
+
+        <div id="psychic-game"></div>
+
+
+
+    
+        
+    </body>
+
+    <script>
+
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 9;
+        var guessesShown = [];
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", 
+                                "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+
+document.onkeyup = function(event) {
+
+// Remember that this determines which key was pressed.
+var guessesMade = event.key.toLowerCase();
+
+// This line of code will make a choice from the options array.
+var computerAnswer = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+function pushStr () {
+ guessesShown.push(guessesMade);
+ console.log("This is running");
+};
+
+
+
+ while (guessesLeft > 0) {
+    if (guessesMade === computerAnswer) {
+        wins += 1;
+        console.log("Your wins are " + wins);
+        alert("You got it!");
+        
+        break;
+        
+
+    } else if (guessesMade !== computerAnswer) {
+        //check guesses remaining 
+        guessesLeft -= 1;
+        pushStr ();
+        alert("Wrong!");
+        //add a return statement?
+        break;
+    
+    }
+        
+    } 
+
+    if (guessesLeft < 1) {
+        losses++;
+        console.log("Your losses are " + losses);
+        alert("You lose!");
+        guessesLeft = 9;
+        guessesShown = [];
+      
+    }
+
+
+
+var html =
+    "<p>Wins: " + wins + "</p>" +
+    "<p>Losses: " + losses + "</p>" +
+    "<p>Guesses Left: " + guessesLeft + "</p>" +
+    "<p>Your guesses so far: " + guessesShown + "</p>";  
+
+document.querySelector("#psychic-game").innerHTML = html;
+
+
+};
+    </script>
+</html>
